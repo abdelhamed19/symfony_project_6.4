@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
-use FOS\RestBundle\Serializer\Serializer as SerializerSerializer;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
 use JMS\Serializer\Annotation as Serializer;

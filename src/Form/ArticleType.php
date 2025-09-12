@@ -50,6 +50,7 @@ class ArticleType extends AbstractType
             'data_class' => Article::class,
             'csrf_protection' => false,
             'file_required' => false,
+            'allow_extra_fields' => true,
         ]);
     }
 }
