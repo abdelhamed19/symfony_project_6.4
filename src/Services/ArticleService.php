@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ArticleService
 {
-    
+
     public function __construct(
         private ArticleRepository $articleRepository,
         private EntityManagerInterface $em,
@@ -35,6 +35,17 @@ class ArticleService
             $page,
             20,
         );
+    }
+
+    public function deleteArticlesByCategoryId($category)
+    {
+        $articles = $this->em->getRepository(Article::class)->findBy([
+            'category' => $category
+        ]);
+        foreach ($articles as $article) {
+            $this->em->remove($article);
+            $this->em->flush();
+        }
     }
 
     private function getUploadPath(): string
@@ -74,5 +85,4 @@ class ArticleService
             $this->em->flush();
         }
     }
-
 }

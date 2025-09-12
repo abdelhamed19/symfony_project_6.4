@@ -4,6 +4,7 @@ namespace App\Job\MessageHandler;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Services\ArticleService;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Job\Message\CategoryDeleteMessage;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -12,7 +13,8 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 class CategoryDeleteMessageHandler
 {
     public function __construct(
-        private EntityManagerInterface $em
+        private EntityManagerInterface $em,
+        private ArticleService $articleService
     ) {}
     
     public function __invoke(CategoryDeleteMessage $message)
@@ -20,14 +22,7 @@ class CategoryDeleteMessageHandler
         $categoryId = $message->getCategoryId();
         $category = $this->em->getRepository(Category::class)->find($categoryId);
         if ($category) {
-            $articles = $this->em->getRepository(Article::class)->findBy([
-                'category' => $category
-            ]);
-            foreach ($articles as $article) {
-                $this->em->remove($article);
-                $this->em->flush();
-            }
-
+            $this->articleService->deleteArticlesByCategoryId($category);
             $this->em->remove($category);
             $this->em->flush();
         }
