@@ -54,7 +54,67 @@ class ThirdPartyService
             $statusCode = $request->getStatusCode();
             $content = $request->getContent();
             $data = $request->toArray();
-            
+
+            return [
+                'success' => true,
+                'status_code' => $statusCode,
+                'content' => $content,
+                'data' => $data,
+            ];
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'error' => 'HTTP request failed: ' . $e->getMessage(),
+            ];
+        }
+    }
+
+    public function putData($url, $body = [], $headers = [])
+    {
+        try {
+            $request = $this->client->request('PUT', $url, [
+                'headers' => array_merge([
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                ], $headers),
+                'json' => $body,
+                'verify_peer' => false,
+                'verify_host' => false,
+            ]);
+
+            $statusCode = $request->getStatusCode();
+            $content = $request->getContent();
+            $data = $request->toArray();
+
+            return [
+                'success' => true,
+                'status_code' => $statusCode,
+                'content' => $content,
+                'data' => $data,
+            ];
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'error' => 'HTTP request failed: ' . $e->getMessage(),
+            ];
+        }
+    }
+
+    public function deleteData($url, $headers = [])
+    {
+        try {
+            $request = $this->client->request('DELETE', $url, [
+                'headers' => array_merge([
+                    'Accept' => 'application/json',
+                ], $headers),
+                'verify_peer' => false,
+                'verify_host' => false,
+            ]);
+
+            $statusCode = $request->getStatusCode();
+            $content = $request->getContent();
+            $data = $request->toArray();
+
             return [
                 'success' => true,
                 'status_code' => $statusCode,
