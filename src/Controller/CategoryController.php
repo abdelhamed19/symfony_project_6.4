@@ -21,6 +21,7 @@ use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 #[Route('/api/categories')]
 #[IsGranted('ROLE_ADMIN', statusCode: 403, message: 'Access denied.')]
+// #[IsGranted(['ROLE_ADMIN', 'ROLE_USER'], statusCode: 403)]
 final class CategoryController extends AbstractFOSRestController
 {
 

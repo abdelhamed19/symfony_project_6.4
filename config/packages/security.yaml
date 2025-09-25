@@ -29,4 +29,5 @@ security:
       - { path: ^/api/auth/login, roles: PUBLIC_ACCESS }
       - { path: ^/api/auth/register, roles: PUBLIC_ACCESS }
       - { path: ^/api/course, roles: ROLE_ADMIN }
+    #   - { path: ^/api/course, roles: [ROLE_USER, ROLE_ADMIN] }
       - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }

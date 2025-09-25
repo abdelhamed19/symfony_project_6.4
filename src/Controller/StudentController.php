@@ -33,6 +33,7 @@ final class StudentController extends AbstractFOSRestController
      */
     public function index(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $page = $request->query->getInt('page', 1);
         $students = $this->studentService->listAll($page);
         $this->rest->setPagination($students);

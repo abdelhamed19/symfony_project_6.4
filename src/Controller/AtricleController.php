@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 #[Route('/api/atricles')]
@@ -26,6 +27,7 @@ final class AtricleController extends AbstractFOSRestController
     ) {}
 
     #[Route('/list', name: 'list_articles',  methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     /**
      * @OA\Tag(name="Articles")
      * @OA\Parameter(ref="#/components/parameters/locale")
