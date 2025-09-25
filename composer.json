@@ -16,6 +16,7 @@
         "jms/serializer-bundle": "*",
         "knplabs/doctrine-behaviors": "dev-master",
         "knplabs/knp-paginator-bundle": "6.0",
+        "lexik/jwt-authentication-bundle": "^3.1",
         "phpdocumentor/reflection-docblock": "^5.6",
         "phpstan/phpdoc-parser": "^2.3",
         "symfony/console": "6.4.*",

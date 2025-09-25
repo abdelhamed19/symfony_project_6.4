@@ -16,9 +16,11 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 #[Route('/api/categories')]
+#[IsGranted('ROLE_ADMIN', statusCode: 403, message: 'Access denied.')]
 final class CategoryController extends AbstractFOSRestController
 {
 

@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('api/third/party', name: 'app_third_party')]
 final class ThirdPartyController extends AbstractFOSRestController
@@ -166,6 +165,5 @@ final class ThirdPartyController extends AbstractFOSRestController
 
         return $this->handleView($this->view($this->rest->getResponse(), Response::HTTP_OK));
     }
-
 
 }
