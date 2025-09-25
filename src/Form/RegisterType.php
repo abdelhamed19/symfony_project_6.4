@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -34,7 +35,16 @@ class RegisterType extends AbstractType
                     new Assert\NotBlank(),
                     new Assert\Length(['min' => 8]),
                 ],
-            ]);
+            ])
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'User' => 'ROLE_USER',
+                    'Admin' => 'ROLE_ADMIN',
+                ],
+                'multiple' => true,
+                'expanded' => true,
+            ])
+            ;
     }
 
 
